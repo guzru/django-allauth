@@ -112,8 +112,7 @@ class LoginForm(forms.Form):
             if user.is_active:
                 self.user = user
             else:
-                raise forms.ValidationError(_("This account is currently"
-                                              " inactive."))
+                raise forms.ValidationError(_("This account has been closed."))
         else:
             if app_settings.AUTHENTICATION_METHOD == AuthenticationMethod.EMAIL:
                 error = _("The e-mail address and/or password you specified"
