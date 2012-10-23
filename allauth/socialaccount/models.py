@@ -22,7 +22,7 @@ class SocialApp(models.Model):
     objects = SocialAppManager()
 
     site = models.ForeignKey(Site)
-    provider = models.CharField(max_length=30, 
+    provider = models.CharField(max_length=30,
                                 choices=providers.registry.as_choices())
     name = models.CharField(max_length=40)
     key = models.CharField(max_length=100,
@@ -146,7 +146,7 @@ class SocialLogin(object):
         """
         assert not self.is_existing
         try:
-            a = SocialAccount.objects.get(provider=self.account.provider, 
+            a = SocialAccount.objects.get(provider=self.account.provider,
                                           uid=self.account.uid)
             # Update account
             a.extra_data = self.account.extra_data
@@ -167,12 +167,11 @@ class SocialLogin(object):
                     self.token.save()
         except SocialAccount.DoesNotExist:
             pass
-    
-    def get_redirect_url(self, 
-                         fallback=allauth.app_settings.LOGIN_REDIRECT_URL):
-        url = self.state.get('next') or fallback
+
+    def get_redirect_url(self,
+                         url=allauth.app_settings.LOGIN_REDIRECT_URL):
         return url
-            
+
     @classmethod
     def state_from_request(cls, request):
         state = {}
@@ -185,7 +184,7 @@ class SocialLogin(object):
     def marshall_state(cls, request):
         state = cls.state_from_request(request)
         return simplejson.dumps(state)
-    
+
     @classmethod
     def unmarshall_state(cls, state_string):
         if state_string:
@@ -193,5 +192,5 @@ class SocialLogin(object):
         else:
             state = {}
         return state
-    
-            
+
+
