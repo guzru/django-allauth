@@ -11,12 +11,14 @@ from django.utils import importlib
 
 import app_settings
 
-def get_login_redirect_url(request, 
-                           fallback=app_settings.LOGIN_REDIRECT_URL):
+def get_login_redirect_url(request,
+                           url=app_settings.LOGIN_REDIRECT_URL):
     """
     Returns a url to redirect to after the login
     """
-    url = request.REQUEST.get(REDIRECT_FIELD_NAME) or fallback
+    if url is None:
+        raise Exception("You must set LOGIN_REDIRECT_URL in settings.")
+
     return url
 
 
