@@ -169,8 +169,8 @@ class SocialLogin(object):
             pass
 
     def get_redirect_url(self,
-                         url=allauth.app_settings.LOGIN_REDIRECT_URL):
-        return url
+                         fallback=allauth.app_settings.LOGIN_REDIRECT_URL):
+        return fallback
 
     @classmethod
     def state_from_request(cls, request):
